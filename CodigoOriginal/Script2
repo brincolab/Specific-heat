@@ -1,0 +1,20 @@
+mkdir Results2
+
+for size in 11 21 41 51 101 121 151;do
+for T in 2 6  8 9 10 11 12 15 20 30 40 ;do
+#for T in 16 18; do
+
+echo $size $T
+rm RX.f90
+cp specific_heat.f90 RX.f90
+perl -pi -e "s[Largo=101][Largo=$size]g" RX.f90
+perl -pi -e "s[T=8][T=$T]g" RX.f90
+perl -pi -e "s[Eners.dat][EnerT$T""L$size"".dat]g" RX.f90
+perl -pi -e "s[N101J.txt][N$size""J.txt]g" RX.f90
+perl -pi -e "s[N101H.txt][N$size""H.txt]g" RX.f90
+
+rm Run
+gfortran -O3 RX.f90 -o Run
+./Run
+done
+done

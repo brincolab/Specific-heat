@@ -1,0 +1,13 @@
+mkdir Results2
+
+for size in 11 21 51 101 121 151;do
+rm Res2N$size
+for T in 2 6  8 9 10 11 12 15 20 30 40; do
+tail -n 90000 Results2/EnerT$T""L$size"".dat > Xfile
+wc -l Xfile
+awk -v T=$T '{E+=$2;E2+=$2*$2;n++} END {print T/10, E/n, (E2/n-E*E/n/n)/T/T*100, n, E, E2}' Xfile >> Res2N$size
+rm Xfile
+
+
+done
+done
